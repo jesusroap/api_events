@@ -2,6 +2,7 @@ package com.example.events.services;
 
 import java.util.List;
 
+import com.example.events.models.Event;
 import com.example.events.models.EventDTO;
 
 public interface IEventsService {

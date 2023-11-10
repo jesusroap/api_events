@@ -1,12 +1,14 @@
 package com.example.events.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.Repository;
 
-import com.example.events.models.EventDTO;
+import com.example.events.models.Event;
 
-public interface EventsRepositories extends Repository<EventDTO, Integer> {
-	public List<EventDTO> findAll();
-	public EventDTO findById(int id);
+public interface EventsRepositories extends Repository<Event, Integer> {
+	public List<Event> findAll();
+	public Optional<Event> findById(int id);
+	public Event save(Event event);
 }
