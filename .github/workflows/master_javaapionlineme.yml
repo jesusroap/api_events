@@ -50,4 +50,4 @@ jobs:
           app-name: 'javaapionlineme'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC6842891E8243119C4A65E8658673F7 }}
-          package: '*.jar'
+          package: '*.war'
