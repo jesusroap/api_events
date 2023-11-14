@@ -23,12 +23,20 @@ jobs:
     steps:
       - name: Configurar entorno
         run: |
-          echo "HOST_DB=${{ secrets.HOST_DB }}" >> $GITHUB_ENV
+          echo "HOST_DB=${{ secrets.HOST_DB }}"
+          echo "PORT_DB=${{ secrets.PORT_DB }}"
+          echo "TABLE_DB=${{ secrets.TABLE_DB }}"
+          echo "USER_DB=${{ secrets.USER_DB }}"
+          echo "PASS_DB=${{ secrets.PASS_DB }}"
           sleep 1  # Introduce un pequeño retardo
-
+    
       - name: Imprimir variables de entorno
         run: |
-          echo "MI_VARIABLE: $HOST_DB"
+          echo "HOST_DB: $HOST_DB"
+          echo "PORT_DB: $PORT_DB"
+          echo "TABLE_DB: $TABLE_DB"
+          echo "USER_DB: $USER_DB"
+          echo "PASS_DB: $PASS_DB"
           
       - uses: actions/checkout@v4
 
