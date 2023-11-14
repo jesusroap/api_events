@@ -22,7 +22,9 @@ jobs:
 
     steps:
       - name: Configurar entorno
-        run: echo "HOST_DB=${{ secrets.HOST_DB }}" >> $GITHUB_ENV
+        run: |
+          echo "HOST_DB=${{ secrets.HOST_DB }}" >> $GITHUB_ENV
+          sleep 1  # Introduce un pequeño retardo
 
       - name: Imprimir variables de entorno
         run: |
