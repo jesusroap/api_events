@@ -24,7 +24,12 @@ jobs:
       - name: Test Var Env
         env:
           HOST_DB: ${{ vars.HOST_DB }}          
-        run: echo "$HOST_DB"
+        run: echo $HOST_DB
+
+      - name: Test Var Env Secrect
+        env:
+          PASS_DB: ${{ secrets.PASS_DB }}          
+        run: echo $PASS_DB
 
       - name: Build with Maven
         run: mvn clean install
