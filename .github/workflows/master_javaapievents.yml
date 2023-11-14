@@ -23,6 +23,11 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
+        
+      - name: Test Var Env
+        env:
+          HOST_DB: ${{ env.HOST_DB }}          
+        run: echo "$HOST_DB"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
