@@ -2,8 +2,6 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy WAR app to Azure Web App - javaapievents
-env:
-  HOST_DB: ${{ vars.HOST_DB }}  
 
 on:
   push:
@@ -24,7 +22,7 @@ jobs:
           java-version: '8'
 
       - name: Test Var Env        
-        run: echo "host :" $HOST_DB
+        run: echo "host = ${{ vars.HOST_DB }}"
 
       - name: Test Var Env Secrect
         env:
