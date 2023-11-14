@@ -15,6 +15,13 @@ jobs:
 
     environment:
       name: 'Production'
+    
+    env:
+      HOST_DB: ${{ secrets.HOST_DB }}
+      PORT_DB: ${{ secrets.PORT_DB }}
+      TABLE_DB: ${{ secrets.TABLE_DB }}
+      USER_DB: ${{ secrets.USER_DB }}
+      PASS_DB: ${{ secrets.PASS_DB }}
 
     steps:          
       - uses: actions/checkout@v4
