@@ -22,7 +22,12 @@ jobs:
           java-version: '8'
 
       - name: Build with Maven
+        env:
+          HOST_DB: ${{ env.HOST_DB }}
+
         run: mvn clean install
+          echo "repository variable : $HOST_DB"
+          echo "repository variable : ${HOST_DB}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
