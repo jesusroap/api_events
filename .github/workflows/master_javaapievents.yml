@@ -23,7 +23,7 @@ jobs:
 
       - name: Test Var Env
         env:
-          HOST_DB: ${{ env.HOST_DB }}          
+          HOST_DB: ${{ vars.HOST_DB }}          
         run: echo "$HOST_DB"
 
       - name: Build with Maven
