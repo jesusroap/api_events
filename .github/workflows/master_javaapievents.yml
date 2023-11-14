@@ -13,6 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      HOST_DB: ${{ secrets.HOST_DB }}
+      PORT_DB: ${{ secrets.PORT_DB }}
+      TABLE_DB: ${{ secrets.TABLE_DB }}
+      USER_DB: ${{ secrets.USER_DB }}
+      PASS_DB: ${{ secrets.PASS_DB }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,19 +28,10 @@ jobs:
         with:
           java-version: '8'
 
-      - name: Configurar variable de entorno
-        run: echo "HOST_DB=${{secrets.HOST_DB}}" >> $GITHUB_ENV
-
       - name: Imprimir variable de entorno
         run: echo "La variable de entorno es $HOST_DB"
 
       - name: Build with Maven
-        env:
-          HOST_DB: ${{ secrets.HOST_DB }}
-          PORT_DB: ${{ secrets.PORT_DB }}
-          TABLE_DB: ${{ secrets.TABLE_DB }}
-          USER_DB: ${{ secrets.USER_DB }}
-          PASS_DB: ${{ secrets.PASS_DB }}
         run: mvn clean install
         
       - name: Upload artifact for deployment job
