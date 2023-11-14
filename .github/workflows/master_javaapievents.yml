@@ -24,7 +24,7 @@ jobs:
       - name: Test Var Env
         env:
           HOST_DB: ${{ vars.HOST_DB }}          
-        run: echo "host :" >> $HOST_DB
+        run: echo "host :" $HOST_DB
 
       - name: Test Var Env Secrect
         env:
