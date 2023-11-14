@@ -21,14 +21,22 @@ jobs:
         with:
           java-version: '8'
 
+      - name: Test Var Env
+        env:
+          HOST_DB: ${{ vars.HOST_DB }}          
+        run: echo $HOST_DB
+
+      - name: Test Var Env Secrect
+        env:
+          PASS_DB: ${{ secrets.PASS_DB }}          
+        run: echo $PASS_DB
+
       - name: Build with Maven
         env:
           HOST_DB: ${{ env.HOST_DB }}
 
         run: mvn clean install
-          echo "repository variable : $HOST_DB"
-          echo "repository variable : ${HOST_DB}"
-
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
