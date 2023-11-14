@@ -21,15 +21,19 @@ jobs:
       PASS_DB: ${{ secrets.PASS_DB }}
 
     steps:
+      - name: Configurar entorno
+        run: echo "HOST_DB=${{ secrets.HOST_DB }}" >> $GITHUB_ENV
+
+      - name: Imprimir variables de entorno
+        run: |
+          echo "MI_VARIABLE: $HOST_DB"
+          
       - uses: actions/checkout@v4
 
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
           java-version: '8'
-
-      - name: Imprimir variable de entorno
-        run: echo "La variable de entorno es $HOST_DB"
 
       - name: Build with Maven
         run: mvn clean install
