@@ -21,6 +21,12 @@ jobs:
         with:
           java-version: '8'
 
+      - name: Configurar variable de entorno
+        run: echo "NG_APP_CLIENT_SECRET=${{ secrets.HOST_DB }}" >> $GITHUB_ENV
+
+      - name: Imprimir variable de entorno
+        run: echo "La variable de entorno es $NG_APP_CLIENT_SECRET"
+
       - name: Build with Maven
         env:
           HOST_DB: ${{ secrets.HOST_DB }}
