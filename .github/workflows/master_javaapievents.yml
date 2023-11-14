@@ -21,16 +21,13 @@ jobs:
         with:
           java-version: '8'
 
-      - name: Test Var Env        
-        run: printenv
-
-      - name: Test Var Env Secrect
-        env:
-          PASS_DB: ${{ secrets.PASS_DB }}          
-        run: |
-          echo "password : $PASS_DB"
-
       - name: Build with Maven
+        env:
+          HOST_DB: ${{ secrets.HOST_DB }}
+          PORT_DB: ${{ secrets.PORT_DB }}
+          TABLE_DB: ${{ secrets.TABLE_DB }}
+          USER_DB: ${{ secrets.USER_DB }}
+          PASS_DB: ${{ secrets.PASS_DB }}
         run: mvn clean install
         
       - name: Upload artifact for deployment job
