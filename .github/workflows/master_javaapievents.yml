@@ -22,7 +22,7 @@ jobs:
           java-version: '8'
 
       - name: Test Var Env        
-        run: echo "host = ${{ env.HOST_DB }}"
+        run: echo printenv
 
       - name: Test Var Env Secrect
         env:
