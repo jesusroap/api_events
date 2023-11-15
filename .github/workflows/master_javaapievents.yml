@@ -13,23 +13,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
+    environment:
+      name: 'Production'
+    
+    env:
+      HOST_DB: ${{ secrets.HOST_DB }}
+      PORT_DB: ${{ secrets.PORT_DB }}
+      TABLE_DB: ${{ secrets.TABLE_DB }}
+      USER_DB: ${{ secrets.USER_DB }}
+      PASS_DB: ${{ secrets.PASS_DB }}
+
+    steps:          
       - uses: actions/checkout@v4
 
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
           java-version: '8'
-
-      - name: Test Var Env
-        env:
-          HOST_DB: ${{ vars.HOST_DB }}          
-        run: echo $HOST_DB
-
-      - name: Test Var Env Secrect
-        env:
-          PASS_DB: ${{ secrets.PASS_DB }}          
-        run: echo $PASS_DB
 
       - name: Build with Maven
         env:
