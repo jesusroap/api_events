@@ -15,9 +15,7 @@ public class EventDTO {
 	
 	private String planner;
 	
-	public EventDTO() {
-		
-	}
+	public EventDTO() {}
 	
 	public EventDTO(Event event) {
 		this.id = event.getId();

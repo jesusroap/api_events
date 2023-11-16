@@ -1,7 +1,6 @@
 package com.example.events.models;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +32,17 @@ public class Event {
 	
 	@Column
 	private String planner;
+	
+	public Event() {}
+
+	public Event(EventDTO event) {
+		this.id = event.getId();
+		this.name = event.getName();
+		this.description = event.getDescription();
+		this.date = event.getDate();
+		this.location = event.getLocation();
+		this.planner = event.getPlanner();
+	}
 
 	public int getId() {
 		return id;

@@ -9,6 +9,7 @@ import com.example.events.models.Event;
 
 public interface EventsRepositories extends Repository<Event, Integer> {
 	public List<Event> findAll();
-	public Optional<Event> findById(int id);
+	public Event findById(int id);
 	public Event save(Event event);
+	public Event delete(Event event);
 }
