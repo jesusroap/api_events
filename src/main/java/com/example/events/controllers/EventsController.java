@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.events.models.Event;
 import com.example.events.models.EventDTO;
+import com.example.events.models.FilterEventsDTO;
 import com.example.events.models.ResponseDTO;
 import com.example.events.services.IEventsService;
 
@@ -33,6 +34,11 @@ public class EventsController {
 	@GetMapping
 	public List<EventDTO> getEvents() {
 		return eventsService.getAllEvents();
+	}
+	
+	@PostMapping("/filter")
+	public Object filterEvents(@RequestBody FilterEventsDTO filter) {
+		return eventsService.filterEvents(filter);
 	}
 	
 	@GetMapping("/event/{id}")
