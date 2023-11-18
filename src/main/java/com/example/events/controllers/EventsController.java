@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.events.models.Event;
 import com.example.events.models.EventDTO;
+import com.example.events.models.ResponseDTO;
 import com.example.events.services.IEventsService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -39,18 +40,5 @@ public class EventsController {
 		return eventsService.getEvent(id);
 	}
 	
-	@PostMapping("/save")
-	public String saveEvent(@RequestBody EventDTO event) {
-		return eventsService.saveEvent(event);
-	}
 	
-	@PutMapping("/edit")
-	public String updateEvent(@RequestBody EventDTO event) {
-		return eventsService.updateEvent(event);
-	}
-	
-	@DeleteMapping("/delete/{id}")
-	public String deleteEvent(@PathVariable int id) {
-		return eventsService.deleteEvent(id);
-	}
 }

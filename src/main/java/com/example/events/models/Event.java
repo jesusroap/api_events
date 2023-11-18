@@ -33,6 +33,9 @@ public class Event {
 	@Column
 	private String planner;
 	
+	@Column
+	private String picture;
+	
 	public Event() {}
 
 	public Event(EventDTO event) {
@@ -42,6 +45,7 @@ public class Event {
 		this.date = event.getDate();
 		this.location = event.getLocation();
 		this.planner = event.getPlanner();
+		this.picture = event.getPicture();
 	}
 
 	public int getId() {
@@ -91,5 +95,12 @@ public class Event {
 	public void setPlanner(String planner) {
 		this.planner = planner;
 	}
-	
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 }
