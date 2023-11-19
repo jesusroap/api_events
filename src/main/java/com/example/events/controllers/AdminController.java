@@ -24,7 +24,7 @@ import com.example.events.models.ResponseDTO;
 import com.example.events.models.UserDTO;
 import com.example.events.services.IAdminService;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "https://javaapievents.azurewebsites.net"}, maxAge = 3600)
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
