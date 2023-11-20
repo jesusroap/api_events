@@ -8,7 +8,7 @@ import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -91,11 +91,14 @@ public class AdminService implements IAdminService {
 	@Override
 	public ResponseDTO fileUpload(MultipartFile file) {
 		String fileName = file.getOriginalFilename();
-
-        Path storagePath = Paths.get(env.getProperty("URL_PICTURE"), fileName);
-
+		
         try {
-            Files.copy(file.getInputStream(), storagePath, StandardCopyOption.REPLACE_EXISTING);
+        	Path staticFolderPath = Paths.get(env.getProperty("URL_PICTURE") + fileName);
+            
+            System.out.println(staticFolderPath);
+
+            Files.copy(file.getInputStream(), staticFolderPath, StandardCopyOption.REPLACE_EXISTING);
+
             return new ResponseDTO("Archivo subido correctamente", true);
         } catch (IOException e) {
             return new ResponseDTO("Error al subir el archivo: " + e);
