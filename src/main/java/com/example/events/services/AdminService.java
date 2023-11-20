@@ -1,14 +1,10 @@
 package com.example.events.services;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +15,11 @@ import com.example.events.models.User;
 import com.example.events.models.UserDTO;
 import com.example.events.repositories.EventsRepositories;
 import com.example.events.repositories.UserRepositories;
+
+import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.azure.storage.blob.models.BlobHttpHeaders;
+import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobClient;
 
 @Service
 public class AdminService implements IAdminService {
@@ -90,19 +91,35 @@ public class AdminService implements IAdminService {
 	
 	@Override
 	public ResponseDTO fileUpload(MultipartFile file) {
-		String fileName = file.getOriginalFilename();
 		
         try {
-        	Path staticFolderPath = Paths.get(env.getProperty("URL_PICTURE") + fileName);
-            
-            System.out.println(staticFolderPath);
+//        	Path staticFolderPath = Paths.get(env.getProperty("URL_PICTURE") + fileName);
+//            
+//            System.out.println(staticFolderPath);
+//
+//            Files.copy(file.getInputStream(), staticFolderPath, StandardCopyOption.REPLACE_EXISTING);
 
-            Files.copy(file.getInputStream(), staticFolderPath, StandardCopyOption.REPLACE_EXISTING);
+            BlobServiceClientBuilder serviceClientBuilder = new BlobServiceClientBuilder().connectionString(env.getProperty("CONNECTION_STORAGE"));
+
+            BlobContainerClient containerClient = serviceClientBuilder.buildClient().getBlobContainerClient(env.getProperty("CONTAINER_NAME"));
+
+            BlobClient blobClientBuilder = containerClient.getBlobClient(file.getOriginalFilename());
+            
+            if (blobClientBuilder.exists()) {
+                blobClientBuilder.delete();
+            }
+            
+            BlobHttpHeaders blobHttpHeaders = new BlobHttpHeaders();
+            blobHttpHeaders.setContentType(file.getContentType());
+            
+            try (InputStream dataStream = file.getInputStream()) {
+                blobClientBuilder.upload(dataStream, file.getSize());
+                blobClientBuilder.setHttpHeaders(blobHttpHeaders);
+            }
 
             return new ResponseDTO("Archivo subido correctamente", true);
         } catch (IOException e) {
             return new ResponseDTO("Error al subir el archivo: " + e);
         }
 	}
-	
 }
